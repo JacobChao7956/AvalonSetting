@@ -8,6 +8,9 @@
     <string name="draw_character">取得身份</string>
     <string name="remembered">記住了</string>
     <string name="game_start">遊戲開始</string>
+    <string name="mission_completed">任務成功</string>
+    <string name="mission_failed">任務失敗</string>
+    <string name="restart_game">重新開始遊戲？</string>
 
     <string-array name="character_all">
         <item>梅林</item>
@@ -38,8 +41,7 @@
     <string name="morgana">魔甘娜</string>
     <string name="assassin">刺客</string>
     <string name="oberon">奧伯倫</string>
-    <string name="your_character_is">您的身份是：%1$s</string>
-    <string name="you_are_bad_guys">%1$s 家和 %2$s 家是您的快樂小夥伴！</string>
-    <string name="omniscient">%1$s 家、 %2$s 家和 %3$s 家是來破壞任務的！</string>
-    <string name="chosen_one">%1$s 家和 %2$s 家，誰才是真正的梅林？</string>
+    <string name="you_are_bad_guys">\n%1$s 家和 %2$s 家，\n是您的快樂小夥伴！</string>
+    <string name="omniscient">\n%1$s 家、 %2$s 家和 %3$s 家，\n是來破壞任務的！</string>
+    <string name="chosen_one">\n%1$s 家和 %2$s 家，\n誰才是真正的梅林？</string>
 </resources>

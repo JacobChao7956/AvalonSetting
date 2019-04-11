@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context=".DrawActivity">
 
-    <TextView
-        android:id="@+id/character"
+    <ImageView
+        android:id="@+id/characterIcon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -16,11 +16,25 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:layout_weight="2"
+        android:layout_weight="7"
+        android:background="@drawable/ic_account_circle_blue_24dp"
         android:ems="1"
         android:gravity="center"
         android:text="亞瑟的忠臣"
         android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/character"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="character"
+        android:textColor="@android:color/black"
+        android:textSize="48sp" />
 
     <TextView
         android:id="@+id/characterInfo"
@@ -29,9 +43,9 @@
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:text="Character Info"
         android:textSize="24sp" />
 

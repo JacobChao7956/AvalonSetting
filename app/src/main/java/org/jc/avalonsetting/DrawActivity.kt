@@ -3,9 +3,11 @@ package org.jc.avalonsetting
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_draw.*
+
 
 class DrawActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -37,6 +39,9 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
         }))
         //亂數排列角色
         CHARACTERS.shuffle()
+        CHARACTERS.forEach {
+            println(it)
+        }
     }
 
     override fun onClick(view: View?) {
@@ -49,11 +54,18 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             if (currentPlayer == 9) {
                 draw.text = getString(R.string.game_start)
             }
-            players[currentPlayer].background = getDrawable(R.drawable.ic_player_black_oval_24p)
+            players[currentPlayer].background = getDrawable(R.drawable.ic_player_black_oval_48p)
             currentPlayer += 1
         } else {
             startActivity(Intent(this, TableActivity::class.java))
             finish()
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        return if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
+            ReStartDialog(this).create().show()
+            true
+        } else super.onKeyDown(keyCode, event)
     }
 }
