@@ -8,6 +8,7 @@
     <string name="draw_character">取得身份</string>
     <string name="remembered">記住了</string>
     <string name="game_start">遊戲開始</string>
+    <string name="mission_result">任務結果</string>
     <string name="mission_completed">任務成功</string>
     <string name="mission_failed">任務失敗</string>
     <string name="restart_game">重新開始遊戲？</string>

@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.view_table.*
 
 class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface.OnClickListener {
 
-    private var game = 1
-    private val games by lazy {
+    private var game = 0
+    private val gameBoard by lazy {
         arrayOf(game1, game2, game3, game4, game5)
     }
     private val players by lazy {
@@ -23,7 +23,7 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     }
     private val resultDialog by lazy {
         AlertDialog.Builder(this)
-                .setTitle("")
+                .setTitle(getString(R.string.mission_result))
                 .setPositiveButton(getString(R.string.mission_completed), this)
                 .setNegativeButton(getString(R.string.mission_failed), this)
                 .create()
@@ -44,14 +44,21 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     }
 
     override fun onClick(dialog: DialogInterface, which: Int) {
-        games[game].background = when (which) {
-            BUTTON_POSITIVE -> getDrawable(android.R.color.holo_red_light)
-            BUTTON_NEGATIVE -> getDrawable(android.R.color.holo_red_light)
-            else -> games[game].background
-        }
-        games[game].text = ""
-        if (games[game] == game5) {
-            showGameResult()
+        if (game < gameBoard.size) {
+            gameBoard[game].background = when (which) {
+                BUTTON_POSITIVE -> getDrawable(R.drawable.ic_player_blue_oval_48p)
+                BUTTON_NEGATIVE -> getDrawable(R.drawable.ic_player_red_oval_48p)
+                else -> gameBoard[game].background
+            }
+            gameBoard[game].text = ""
+            gameBoard[game].isClickable = false
+            if (gameBoard[game] == game5) {
+                showGameResult()
+            }
+            game += 1
+            if (game < gameBoard.size) {
+                gameBoard[game].isClickable = true
+            }
         }
     }
 
