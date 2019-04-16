@@ -13,6 +13,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:text="1"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/player6"
         app:layout_constraintEnd_toStartOf="@+id/player2"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="2"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player3"
         app:layout_constraintStart_toEndOf="@+id/player1"
         app:layout_constraintTop_toTopOf="@+id/player1" />
@@ -38,6 +40,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="3"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player4"
         app:layout_constraintStart_toEndOf="@+id/player2"
         app:layout_constraintTop_toTopOf="@+id/player2" />
@@ -50,6 +53,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="4"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player5"
         app:layout_constraintStart_toEndOf="@+id/player3"
         app:layout_constraintTop_toTopOf="@+id/player3" />
@@ -62,6 +66,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:text="5"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player4"
         app:layout_constraintTop_toTopOf="@+id/player4" />
@@ -75,6 +80,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="6"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player7"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +94,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="7"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player8"
         app:layout_constraintStart_toEndOf="@+id/player6"
         app:layout_constraintTop_toTopOf="@+id/player6" />
@@ -100,6 +107,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="8"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player9"
         app:layout_constraintStart_toEndOf="@+id/player7"
         app:layout_constraintTop_toTopOf="@+id/player7" />
@@ -112,6 +120,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="9"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/player10"
         app:layout_constraintStart_toEndOf="@+id/player8"
         app:layout_constraintTop_toTopOf="@+id/player8" />
@@ -124,6 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:text="0"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player9"
         app:layout_constraintTop_toTopOf="@+id/player9" />

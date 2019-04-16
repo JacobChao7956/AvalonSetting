@@ -11,6 +11,7 @@
     <string name="mission_result">任務結果</string>
     <string name="mission_completed">任務成功</string>
     <string name="mission_failed">任務失敗</string>
+    <string name="end_game">遊戲結束</string>
     <string name="restart_game">重新開始遊戲？</string>
 
     <string-array name="character_all">
