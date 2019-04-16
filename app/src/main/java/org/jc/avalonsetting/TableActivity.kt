@@ -23,10 +23,17 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     }
     private val resultDialog by lazy {
         AlertDialog.Builder(this)
-                .setTitle(getString(R.string.mission_result))
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.mission_result))
                 .setPositiveButton(getString(R.string.mission_completed), this)
                 .setNegativeButton(getString(R.string.mission_failed), this)
                 .create()
+    }
+    private val winnerIcon by lazy {
+        getDrawable(R.drawable.ic_player_blue_oval_48p)
+    }
+    private val loserIcon by lazy {
+        getDrawable(R.drawable.ic_player_red_oval_48p)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,26 +53,57 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     override fun onClick(dialog: DialogInterface, which: Int) {
         if (game < gameBoard.size) {
             gameBoard[game].background = when (which) {
-                BUTTON_POSITIVE -> getDrawable(R.drawable.ic_player_blue_oval_48p)
-                BUTTON_NEGATIVE -> getDrawable(R.drawable.ic_player_red_oval_48p)
+                BUTTON_POSITIVE -> winnerIcon
+                BUTTON_NEGATIVE -> loserIcon
                 else -> gameBoard[game].background
             }
             gameBoard[game].text = ""
             gameBoard[game].isClickable = false
-            if (gameBoard[game] == game5) {
-                showGameResult()
-            }
-            game += 1
-            if (game < gameBoard.size) {
-                gameBoard[game].isClickable = true
+
+            if (!checkWinner()) {
+                if (gameBoard[game] == game5) {
+                    showGameResult()
+                }
+                game += 1
+                if (game < gameBoard.size) {
+                    gameBoard[game].isClickable = true
+                }
             }
         }
     }
 
-    private fun showGameResult() {
-        repeat(players.size) {
-            players[it].text = CHARACTERS[it]
+    private fun checkWinner(): Boolean {
+        var win = 0
+        var lose = 0
+        repeat(game) {
+            when (gameBoard[game].background) {
+                winnerIcon -> win += 1
+                else -> lose += 1
+            }
         }
+        if (win == 3 || lose == 3) {
+            gameBoard.forEach {
+                it.isClickable = false
+            }
+            game = 5
+            showGameResult()
+            return true
+        }
+        return false
+    }
+
+    private fun showGameResult() {
+        AlertDialog.Builder(this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.end_game))
+                .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
+                    repeat(players.size) {
+                        players[it].text = CHARACTERS[it].substring(0, 1)
+                    }
+                }
+                .setCancelable(false)
+                .create()
+                .show()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
