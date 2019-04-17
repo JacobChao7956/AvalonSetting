@@ -90,35 +90,22 @@ class CharacterFragment : DialogFragment() {
     }
 
     private fun chooseCharacter() {
-        var showCharacter = ""
         when (CHARACTERS[currentPlayer]) {
-            merlin -> showCharacter = merlin
-            percival -> showCharacter = percival
-            mordred -> {
-                characterIcon.background = context?.getDrawable(R.drawable.ic_account_circle_red_24dp)
-                showCharacter = mordred
-            }
-            morgana -> {
-                characterIcon.background = context?.getDrawable(R.drawable.ic_account_circle_red_24dp)
-                showCharacter = morgana
-            }
-            assassin -> {
-                characterIcon.background = context?.getDrawable(R.drawable.ic_account_circle_red_24dp)
-                showCharacter = assassin
-            }
-            oberon -> {
-                characterIcon.background = context?.getDrawable(R.drawable.ic_account_circle_red_24dp)
-                showCharacter = oberon
-            }
-            arthursLoyalty -> showCharacter = arthursLoyalty
+            merlin -> characterIcon.background = context?.getDrawable(R.drawable.merlin)
+            percival -> characterIcon.background = context?.getDrawable(R.drawable.percival)
+            mordred -> characterIcon.background = context?.getDrawable(R.drawable.mordred)
+            morgana -> characterIcon.background = context?.getDrawable(R.drawable.morgana)
+            assassin -> characterIcon.background = context?.getDrawable(R.drawable.assassin)
+            oberon -> characterIcon.background = context?.getDrawable(R.drawable.oberon)
+            arthursLoyalty -> characterIcon.background = context?.getDrawable(R.drawable.loyalty)
         }
-        val showInfo = whoYouAre(showCharacter)
-        character.text = showCharacter
+        val showInfo = whoYouAre()
+//        character.text = showCharacter
         characterInfo.text = showInfo
     }
 
-    private fun whoYouAre(character: String): String {
-        return when (character) {
+    private fun whoYouAre(): String {
+        return when (CHARACTERS[currentPlayer]) {
             merlin -> String.format(knowBadGuys, merlinSaw[0], merlinSaw[1], merlinSaw[2])
             percival -> String.format(whoIsMerlin, percivalSaw[0], percivalSaw[1])
             mordred -> youAreBadGuys(mordred)

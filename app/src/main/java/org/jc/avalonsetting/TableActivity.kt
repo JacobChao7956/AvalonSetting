@@ -30,10 +30,10 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
                 .create()
     }
     private val winnerIcon by lazy {
-        getDrawable(R.drawable.ic_player_blue_oval_48p)
+        getDrawable(R.drawable.token_success)
     }
     private val loserIcon by lazy {
-        getDrawable(R.drawable.ic_player_red_oval_48p)
+        getDrawable(R.drawable.token_failed)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,6 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
                 BUTTON_NEGATIVE -> loserIcon
                 else -> gameBoard[game].background
             }
-            gameBoard[game].text = ""
             gameBoard[game].isClickable = false
 
             if (!checkWinner()) {
