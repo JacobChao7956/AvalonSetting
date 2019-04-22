@@ -64,7 +64,7 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             fragment.arguments = bundle
             fragment.show(supportFragmentManager, "Character")
             if (currentPlayer == 9) {
-                draw.text = getString(R.string.game_start)
+                draw.background = getDrawable(R.drawable.shild)
             }
             players[currentPlayer].background = getDrawable(R.drawable.ic_player_black_oval_48p)
             currentPlayer += 1

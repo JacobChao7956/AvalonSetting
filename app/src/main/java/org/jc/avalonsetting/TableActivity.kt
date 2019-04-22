@@ -35,6 +35,12 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     private val loserIcon by lazy {
         getDrawable(R.drawable.token_failed)
     }
+    private val goodMan by lazy {
+        getDrawable(R.drawable.ic_player_blue_oval_48p)
+    }
+    private val badGuy by lazy {
+        getDrawable(R.drawable.ic_player_red_oval_48p)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +104,11 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
                 .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
                     repeat(players.size) {
                         players[it].text = CHARACTERS[it].substring(0, 1)
+                        players[it].setTextColor(getColor(android.R.color.white))
+                        when (players[it].text) {
+                            "莫", "魔", "奧", "刺" -> players[it].background = badGuy
+                            else -> players[it].background = goodMan
+                        }
                     }
                 }
                 .setCancelable(false)
