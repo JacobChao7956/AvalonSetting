@@ -53,7 +53,11 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     }
 
     override fun onClick(view: View) {
-        resultDialog.show()
+        repeat(gameBoard.size){
+            gameBoard[it].isClickable = false
+        }
+        showGameResult()
+//        resultDialog.show()
     }
 
     override fun onClick(dialog: DialogInterface, which: Int) {
