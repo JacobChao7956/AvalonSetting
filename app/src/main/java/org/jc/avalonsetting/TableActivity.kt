@@ -4,8 +4,8 @@ import android.content.DialogInterface
 import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.View
 import kotlinx.android.synthetic.main.activity_table.*
@@ -46,8 +46,8 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table)
         title = when (Players) {
-            GAME_SET_8 -> PLAYER_8
-            GAME_SET_10 -> PLAYER_10
+            GAME_8P -> PLAYER_8
+            GAME_10P -> PLAYER_10
             else -> PLAYER_10
         }
     }

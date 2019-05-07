@@ -1,7 +1,7 @@
 package org.jc.avalonsetting
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,7 +100,7 @@ class CharacterFragment : DialogFragment() {
             arthursLoyalty -> characterIcon.background = context?.getDrawable(R.drawable.loyalty)
         }
         val showInfo = whoYouAre()
-//        character.text = showCharacter
+//        Character.text = showCharacter
         characterInfo.text = showInfo
     }
 

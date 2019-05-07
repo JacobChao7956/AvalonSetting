@@ -13,7 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +22,10 @@
         </activity>
         <activity
             android:name=".DrawActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".TableActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

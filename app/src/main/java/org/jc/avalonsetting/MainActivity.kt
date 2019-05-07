@@ -1,7 +1,7 @@
 package org.jc.avalonsetting
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,10 +15,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
+        var players = 0
         when (view) {
-            gameSet8 -> Players = GAME_SET_8
-            gameSet10 -> Players = GAME_SET_10
+            gameSet8 -> players = GAME_8P
+            gameSet10 -> players = GAME_10P
         }
-        startActivity(Intent(this, DrawActivity::class.java))
+        val intent = Intent(this, DrawActivity::class.java)
+        intent.putExtra(GAME_PLAYERS, players)
+        startActivity(intent)
     }
 }

@@ -2,8 +2,8 @@ package org.jc.avalonsetting
 
 import android.content.DialogInterface
 import android.content.DialogInterface.BUTTON_POSITIVE
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 
 class ReStartDialog(private val activity: AppCompatActivity) : AlertDialog.Builder(activity), DialogInterface.OnClickListener {
 
