@@ -1,7 +1,7 @@
 package org.jc.avalonsetting.data
 
 import android.graphics.drawable.Drawable
-import org.jc.avalonsetting.WHITE_BALL
+import org.jc.avalonsetting.references.WHITE_BALL
 
 class Character(
         /**

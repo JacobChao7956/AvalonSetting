@@ -12,4 +12,11 @@ class PlayerRepository(private val playerDao: PlayerDao) {
     suspend fun insert(player: PlayerEntity) {
         playerDao.insert(player)
     }
+
+    @WorkerThread
+    suspend fun update(vararg players: PlayerEntity) {
+        playerDao.update(*players)
+    }
+
+    fun getPlayer(id: Int): PlayerEntity = playerDao.getPlayer(id)
 }

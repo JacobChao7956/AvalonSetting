@@ -10,6 +10,7 @@ import android.view.KeyEvent
 import android.view.View
 import kotlinx.android.synthetic.main.activity_table.*
 import kotlinx.android.synthetic.main.view_table.*
+import org.jc.avalonsetting.references.*
 
 class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface.OnClickListener {
 
@@ -46,9 +47,9 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table)
         title = when (Players) {
-            GAME_8P -> PLAYER_8
-            GAME_10P -> PLAYER_10
-            else -> PLAYER_10
+            GAME_8P -> GAME_8P.toString() + TITLE_GAME_PLAYERS
+            GAME_10P -> GAME_10P.toString() + TITLE_GAME_PLAYERS
+            else -> GAME_10P.toString() + TITLE_GAME_PLAYERS
         }
     }
 
@@ -98,22 +99,22 @@ class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface
     }
 
     private fun showGameResult() {
-        AlertDialog.Builder(this)
-                .setTitle(getString(R.string.app_name))
-                .setMessage(getString(R.string.end_game))
-                .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
-                    repeat(players.size) {
-                        players[it].text = CHARACTERS[it].substring(0, 1)
-                        players[it].setTextColor(getColor(android.R.color.white))
-                        when (players[it].text) {
-                            "莫", "魔", "奧", "刺" -> players[it].background = badGuy
-                            else -> players[it].background = goodMan
-                        }
-                    }
-                }
-                .setCancelable(false)
-                .create()
-                .show()
+//        AlertDialog.Builder(this)
+//                .setTitle(getString(R.string.app_name))
+//                .setMessage(getString(R.string.end_game))
+//                .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
+//                    repeat(players.size) {
+//                        players[it].text = CHARACTERS[it].substring(0, 1)
+//                        players[it].setTextColor(getColor(android.R.color.white))
+//                        when (players[it].text) {
+//                            "莫", "魔", "奧", "刺" -> players[it].background = badGuy
+//                            else -> players[it].background = goodMan
+//                        }
+//                    }
+//                }
+//                .setCancelable(false)
+//                .create()
+//                .show()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

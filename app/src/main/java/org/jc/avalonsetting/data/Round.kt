@@ -1,6 +1,6 @@
 package org.jc.avalonsetting.data
 
-import org.jc.avalonsetting.NO_GODDESS
+import org.jc.avalonsetting.references.NO_GODDESS
 
 class Round(
         /**

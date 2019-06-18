@@ -3,7 +3,7 @@ package org.jc.avalonsetting.data.db.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.jc.avalonsetting.WHITE_BALL
+import org.jc.avalonsetting.references.WHITE_BALL
 
 @Entity(tableName = "vote_info")
 data class VoteInfoEntity(

@@ -22,7 +22,7 @@ data class PlayerEntity(
         @ColumnInfo(name = "c_name")
         var cName: String,
         /**
-         * 所屬陣營
+         * 所屬陣營(0 = 好人，1 = 壞人)
          */
-        var group: Int
+        var side: Int
 )
