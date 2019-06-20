@@ -9,9 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_character.*
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
 import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
-import org.jc.avalonsetting.references.CURRENT_PLAYER
-import androidx.lifecycle.Observer
-import org.jc.avalonsetting.references.Players
 import java.util.*
 
 class CharacterFragment : DialogFragment(), View.OnClickListener {

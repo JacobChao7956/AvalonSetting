@@ -18,5 +18,10 @@ class PlayerRepository(private val playerDao: PlayerDao) {
         playerDao.update(*players)
     }
 
+    @WorkerThread
+    suspend fun deleteAll() {
+        playerDao.deleteAll()
+    }
+
     fun getPlayer(id: Int): PlayerEntity = playerDao.getPlayer(id)
 }

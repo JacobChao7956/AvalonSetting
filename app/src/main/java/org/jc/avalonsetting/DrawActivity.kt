@@ -62,4 +62,10 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             true
         } else super.onKeyDown(keyCode, event)
     }
+
+    override fun onDestroy() {
+        Players = 0
+        playerViewModel.deleteAll()
+        super.onDestroy()
+    }
 }

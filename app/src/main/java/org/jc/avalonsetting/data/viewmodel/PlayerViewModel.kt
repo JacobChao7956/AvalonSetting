@@ -50,6 +50,10 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
         repository.getPlayer(id)
     }
 
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteAll()
+    }
+
     /**
      * Check character's side.
      */

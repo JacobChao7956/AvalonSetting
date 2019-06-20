@@ -47,4 +47,5 @@
     <string name="you_are_bad_guys">\n%1$s 家和 %2$s 家，\n是您的快樂小夥伴！</string>
     <string name="omniscient">\n%1$s 家、 %2$s 家和 %3$s 家，\n是來破壞任務的！</string>
     <string name="chosen_one">\n%1$s 家和 %2$s 家，\n誰才是真正的梅林？</string>
+    <string name="description_character_icon">這是一張角色頭像圖</string>
 </resources>

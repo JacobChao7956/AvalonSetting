@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             gameSet8 -> Players = GAME_8P
             gameSet10 -> Players = GAME_10P
         }
-//        initPlayers()
         val intent = Intent(this, DrawActivity::class.java)
         startActivity(intent)
         finish()
