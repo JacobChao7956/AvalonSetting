@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Debug
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.socks.library.KLog
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +21,13 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repository: PlayerRepository
     var allPlayers: LiveData<List<PlayerEntity>>
+    lateinit var players: List<PlayerEntity>
+    var currentPlayer = MutableLiveData(0)
 
     init {
         val playerDao = InfoDatabase.getDatabase(app, viewModelScope).playerDao()
         repository = PlayerRepository(playerDao)
-        allPlayers = repository.allPlayers
+        allPlayers = repository.allLivePlayers
     }
 
     /**
@@ -37,7 +40,8 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
             KLog.d(characters)
         }
         for (i in 0 until Players) {
-            val player = PlayerEntity(i, "", characters[i], checkSide(characters[i]))
+            val order = if (i == 9) 0 else i + 1
+            val player = PlayerEntity(i, order, "", characters[i], checkSide(characters[i]))
             repository.insert(player)
         }
     }

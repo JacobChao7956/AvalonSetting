@@ -1,11 +1,10 @@
 package org.jc.avalonsetting
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_draw.*
 import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
@@ -13,7 +12,7 @@ import org.jc.avalonsetting.references.*
 
 class DrawActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var currentPlayer = 0
+    private lateinit var playerViewModel: PlayerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +22,25 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             GAME_10P -> GAME_10P.toString() + TITLE_GAME_PLAYERS
             else -> GAME_10P.toString() + TITLE_GAME_PLAYERS
         }
+        playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
+        playerViewModel.allPlayers.observe(this, Observer {
+            playerViewModel.players = playerViewModel.allPlayers.value!!
+        })
+        playerViewModel.currentPlayer.observe(this, Observer {
+            val currentPlayer =
+                    if (playerViewModel.currentPlayer.value!! + 1 == 10) 0
+                    else playerViewModel.currentPlayer.value!! + 1
+            if (playerViewModel.currentPlayer.value!! < Players) {
+                cardNote.text = String.format(getString(R.string.which_player), currentPlayer)
+            }
+        })
+        val characters = ArrayList<String>()
+        characters.addAll(resources.getStringArray(when (Players) {
+            GAME_8P -> R.array.character_8
+            GAME_10P -> R.array.character_all
+            else -> R.array.character_all
+        }))
+        playerViewModel.addNewPlayer(characters)
     }
 
     override fun onClick(view: View?) {
@@ -30,15 +48,8 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showCharacterCard() {
-        if (currentPlayer < Players) {
-            val bundle = Bundle()
-            bundle.putInt(CURRENT_PLAYER, currentPlayer)
-            val fragment = CharacterFragment()
-            fragment.arguments = bundle
-            fragment.show(supportFragmentManager, "Character")
-            cardNote.text = String.format(getString(R.string.which_player),
-                    if (currentPlayer + 1 == 10) 0 else currentPlayer + 1)
-            currentPlayer += 1
+        if (playerViewModel.currentPlayer.value!! < Players) {
+            CharacterFragment().show(supportFragmentManager, "Character")
         } else {
 //            startActivity(Intent(this, TableActivity::class.java))
 //            finish()

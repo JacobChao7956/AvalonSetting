@@ -11,18 +11,19 @@ data class PlayerEntity(
          */
         @PrimaryKey
         val id: Int,
+        val order: Int,
         /**
          * 玩家名稱
          */
         @ColumnInfo(name = "p_name")
-        var pName: String,
+        val pName: String,
         /**
          * 角色名稱
          */
         @ColumnInfo(name = "c_name")
-        var cName: String,
+        val cName: String,
         /**
          * 所屬陣營(0 = 好人，1 = 壞人)
          */
-        var side: Int
+        val side: Int
 )

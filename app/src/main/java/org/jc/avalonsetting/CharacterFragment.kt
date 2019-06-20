@@ -11,11 +11,11 @@ import org.jc.avalonsetting.data.db.entity.PlayerEntity
 import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
 import org.jc.avalonsetting.references.CURRENT_PLAYER
 import androidx.lifecycle.Observer
+import org.jc.avalonsetting.references.Players
 import java.util.*
 
-class CharacterFragment : DialogFragment() {
+class CharacterFragment : DialogFragment(), View.OnClickListener {
 
-    private var currentPlayer = 0
     private lateinit var playerViewModel: PlayerViewModel
     private var player: PlayerEntity? = null
     // characters
@@ -33,11 +33,6 @@ class CharacterFragment : DialogFragment() {
     private val knowBadGuys by lazy { getString(R.string.omniscient) }
     private val youAreBadGuys by lazy { getString(R.string.you_are_bad_guys) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        currentPlayer = arguments!!.getInt(CURRENT_PLAYER)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(context).inflate(R.layout.fragment_character, container, false)
@@ -45,18 +40,15 @@ class CharacterFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        remembered.setOnClickListener(this)
         playerViewModel = ViewModelProviders.of(activity!!).get(PlayerViewModel::class.java)
-        //TODO playerViewModel.allPlayers.value撈出來是null
-//        player = playerViewModel.allPlayers.value?.get(currentPlayer)
+        player = playerViewModel.players[playerViewModel.currentPlayer.value!!]
 //        // add icon to list
         characterIcons.add(Pair(merlin, R.drawable.merlin))
         characterIcons.add(Pair(percival, R.drawable.percival))
         characterIcons.add(Pair(mordred, R.drawable.mordred))
         characterIcons.add(Pair(morgana, R.drawable.morgana))
         characterIcons.add(Pair(assassin, R.drawable.assassin))
-        characterIcons.add(Pair(oberon, R.drawable.oberon))
-        characterIcons.add(Pair(loyalty, R.drawable.loyalty))
-        remembered.setOnClickListener { dismiss() }
     }
 
     override fun onResume() {
@@ -88,8 +80,14 @@ class CharacterFragment : DialogFragment() {
                 val perspective = arrayOf(morgana, mordred)
                 showInfo = "$assassin\n" + whoYouAre(assassin, perspective)
             }
-            oberon -> showInfo = oberon
-            loyalty -> showInfo = loyalty
+            oberon -> {
+                showInfo = oberon
+                characterIcon.background = context?.getDrawable(R.drawable.oberon)
+            }
+            loyalty -> {
+                showInfo = loyalty
+                characterIcon.background = context?.getDrawable(R.drawable.loyalty)
+            }
         }
         characterInfo.text = showInfo
     }
@@ -101,13 +99,9 @@ class CharacterFragment : DialogFragment() {
             }
         }
         val saw = ArrayList<Int>()
-        playerViewModel.allPlayers.value!!.forEach { player ->
+        playerViewModel.players.forEach { player ->
             perspective.forEach {
-                if (player.cName == it) {
-                    var id = player.id + 1
-                    if (id == 10) id = 0
-                    saw.add(id)
-                }
+                if (player.cName == it) saw.add(player.order)
             }
         }
         saw.sort()
@@ -116,5 +110,10 @@ class CharacterFragment : DialogFragment() {
             percival -> String.format(whoIsMerlin, saw[0], saw[1])
             else -> String.format(youAreBadGuys, saw[0], saw[1])
         }
+    }
+
+    override fun onClick(v: View?) {
+        playerViewModel.currentPlayer.value = playerViewModel.currentPlayer.value!! + 1
+        dismiss()
     }
 }
