@@ -12,10 +12,7 @@ import kotlinx.coroutines.launch
 import org.jc.avalonsetting.data.db.InfoDatabase
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
 import org.jc.avalonsetting.data.db.repository.PlayerRepository
-import org.jc.avalonsetting.references.BAD_GUY
-import org.jc.avalonsetting.references.GOOD_MAN
-import org.jc.avalonsetting.references.Players
-import org.jc.avalonsetting.references.VILLAIN
+import org.jc.avalonsetting.references.*
 
 class PlayerViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -40,7 +37,10 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
             KLog.d(characters)
         }
         for (i in 0 until Players) {
-            val order = if (i == 9) 0 else i + 1
+            val order = when (Players) {
+                GAME_8P -> if (i == 7) 0 else i + 1
+                else -> if (i == 9) 0 else i + 1
+            }
             val player = PlayerEntity(i, order, "", characters[i], checkSide(characters[i]))
             repository.insert(player)
         }

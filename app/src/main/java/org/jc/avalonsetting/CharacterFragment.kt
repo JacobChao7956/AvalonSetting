@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_character.*
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
 import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
+import org.jc.avalonsetting.references.GAME_8P
+import org.jc.avalonsetting.references.Players
 import java.util.*
 
 class CharacterFragment : DialogFragment(), View.OnClickListener {
@@ -27,7 +29,12 @@ class CharacterFragment : DialogFragment(), View.OnClickListener {
     private val characterIcons = ArrayList<Pair<String, Int>>()
     // info string
     private val whoIsMerlin by lazy { getString(R.string.chosen_one) }
-    private val knowBadGuys by lazy { getString(R.string.omniscient) }
+    private val knowBadGuys by lazy {
+        getString(when (Players) {
+            GAME_8P -> R.string.omniscient_8p
+            else -> R.string.omniscient_10p
+        })
+    }
     private val youAreBadGuys by lazy { getString(R.string.you_are_bad_guys) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +110,12 @@ class CharacterFragment : DialogFragment(), View.OnClickListener {
         }
         saw.sort()
         return when (cName) {
-            merlin -> String.format(knowBadGuys, saw[0], saw[1], saw[2])
+            merlin -> {
+                when (Players) {
+                    GAME_8P -> String.format(knowBadGuys, saw[0], saw[1])
+                    else -> String.format(knowBadGuys, saw[0], saw[1], saw[2])
+                }
+            }
             percival -> String.format(whoIsMerlin, saw[0], saw[1])
             else -> String.format(youAreBadGuys, saw[0], saw[1])
         }
