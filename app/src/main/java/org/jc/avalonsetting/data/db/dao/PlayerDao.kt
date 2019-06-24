@@ -12,6 +12,8 @@ interface PlayerDao {
     @Query("SELECT * from player WHERE id > :id")
     fun getPlayer(id: Int): PlayerEntity
 
+    @Query("SELECT * from player")
+    fun isPlayerEmpty():List<PlayerEntity>
     @Insert
     suspend fun insert(player: PlayerEntity)
 

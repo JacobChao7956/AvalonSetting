@@ -8,6 +8,27 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="VirtualNavigation">
+        <item name="android:navigationBarColor">#39000000</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="GameSetButtonStyle" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:onClick">onClick</item>
+        <item name="android:textSize">72sp</item>
+    </style>
+
     <style name="PlayerIcon" parent="android:Widget.TextView">
         <item name="android:background">@drawable/ic_player_black_hole_48p</item>
         <item name="android:gravity">center</item>

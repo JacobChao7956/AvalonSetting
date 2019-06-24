@@ -1,11 +1,13 @@
 package org.jc.avalonsetting
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_draw.*
 import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
 import org.jc.avalonsetting.references.*
@@ -34,13 +36,13 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
                 cardNote.text = String.format(getString(R.string.which_player), currentPlayer)
             }
         })
-        val characters = ArrayList<String>()
-        characters.addAll(resources.getStringArray(when (Players) {
-            GAME_8P -> R.array.character_8
-            GAME_10P -> R.array.character_all
-            else -> R.array.character_all
-        }))
-        playerViewModel.addNewPlayer(characters)
+        playerViewModel.addNewPlayer()
+        Log.d("DrawActivity", "onCreate")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("DrawActivity", "onResume")
     }
 
     override fun onClick(view: View?) {
@@ -61,11 +63,5 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             ReStartDialog(this).create().show()
             true
         } else super.onKeyDown(keyCode, event)
-    }
-
-    override fun onDestroy() {
-        Players = 0
-        playerViewModel.deleteAll()
-        super.onDestroy()
     }
 }

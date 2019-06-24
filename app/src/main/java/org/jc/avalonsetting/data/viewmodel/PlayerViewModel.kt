@@ -1,6 +1,7 @@
 package org.jc.avalonsetting.data.viewmodel
 
 import android.app.Application
+import android.content.res.Resources
 import android.os.Debug
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -9,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.socks.library.KLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.jc.avalonsetting.R
 import org.jc.avalonsetting.data.db.InfoDatabase
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
 import org.jc.avalonsetting.data.db.repository.PlayerRepository
@@ -20,29 +22,39 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
     var allPlayers: LiveData<List<PlayerEntity>>
     lateinit var players: List<PlayerEntity>
     var currentPlayer = MutableLiveData(0)
+    private var res:Resources
 
     init {
         val playerDao = InfoDatabase.getDatabase(app, viewModelScope).playerDao()
         repository = PlayerRepository(playerDao)
         allPlayers = repository.allLivePlayers
+        res = app.resources
     }
 
     /**
      * Add new players to database and initial it.
      */
-    fun addNewPlayer(characters: ArrayList<String>) = viewModelScope.launch(Dispatchers.IO) {
-        //亂數排列角色
-        characters.shuffle()
-        if (Debug.isDebuggerConnected()) {
-            KLog.d(characters)
-        }
-        for (i in 0 until Players) {
-            val order = when (Players) {
-                GAME_8P -> if (i == 7) 0 else i + 1
-                else -> if (i == 9) 0 else i + 1
+    fun addNewPlayer() = viewModelScope.launch(Dispatchers.IO) {
+        if (repository.isPlayerEmpty()) {
+            val characters = ArrayList<String>()
+            characters.addAll(res.getStringArray(when (Players) {
+                GAME_8P -> R.array.character_8
+                GAME_10P -> R.array.character_all
+                else -> R.array.character_all
+            }))
+            //亂數排列角色
+            characters.shuffle()
+            if (Debug.isDebuggerConnected()) {
+                KLog.d(characters)
             }
-            val player = PlayerEntity(i, order, "", characters[i], checkSide(characters[i]))
-            repository.insert(player)
+            for (i in 0 until Players) {
+                val order = when (Players) {
+                    GAME_8P -> if (i == 7) 0 else i + 1
+                    else -> if (i == 9) 0 else i + 1
+                }
+                val player = PlayerEntity(i, order, "", characters[i], checkSide(characters[i]))
+                repository.insert(player)
+            }
         }
     }
 

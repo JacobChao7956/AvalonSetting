@@ -24,4 +24,6 @@ class PlayerRepository(private val playerDao: PlayerDao) {
     }
 
     fun getPlayer(id: Int): PlayerEntity = playerDao.getPlayer(id)
+
+    fun isPlayerEmpty(): Boolean = playerDao.isPlayerEmpty().isNullOrEmpty()
 }

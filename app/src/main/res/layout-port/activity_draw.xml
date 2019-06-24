@@ -10,13 +10,13 @@
         android:id="@+id/cardNote"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="@string/draw_character"
         android:textColor="#000000"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cardback"
+        app:layout_constraintBottom_toTopOf="@+id/cardback"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,14 +25,12 @@
         android:id="@+id/cardback"
         android:layout_width="279dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
         android:background="@drawable/cardback"
         android:maxHeight="393dp"
         android:onClick="onClick"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardNote"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardNote" />
 </androidx.constraintlayout.widget.ConstraintLayout>
