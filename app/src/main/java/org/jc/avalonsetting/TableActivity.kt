@@ -1,129 +1,89 @@
 package org.jc.avalonsetting
 
-import android.content.DialogInterface
-import android.content.DialogInterface.BUTTON_NEGATIVE
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_table.*
-import kotlinx.android.synthetic.main.view_table.*
+import kotlinx.android.synthetic.main.view_result.view.*
+import org.jc.avalonsetting.data.db.entity.GameBoardEntity
+import org.jc.avalonsetting.framework.BaseActivity
+import org.jc.avalonsetting.viewmodel.GameBoardViewModel
+import org.jc.avalonsetting.references.GAME_10P
+import org.jc.avalonsetting.references.GAME_8P
+import org.jc.avalonsetting.references.Players
+import org.jc.avalonsetting.references.TITLE_GAME_PLAYERS
 
-class TableActivity : AppCompatActivity(), View.OnClickListener, DialogInterface.OnClickListener {
+class TableActivity : BaseActivity(), View.OnClickListener {
 
-    private var game = 0
-    private val gameBoard by lazy {
-        arrayOf(game1, game2, game3, game4, game5)
-    }
-    private val players by lazy {
-        arrayOf(player1, player2, player3, player4, player5,
-                player6, player7, player8, player9, player10)
-    }
-    private val resultDialog by lazy {
-        AlertDialog.Builder(this)
-                .setTitle(getString(R.string.app_name))
-                .setMessage(getString(R.string.mission_result))
-                .setPositiveButton(getString(R.string.mission_completed), this)
-                .setNegativeButton(getString(R.string.mission_failed), this)
-                .create()
-    }
-    private val winnerIcon by lazy {
-        getDrawable(R.drawable.token_success)
-    }
-    private val loserIcon by lazy {
-        getDrawable(R.drawable.token_failed)
-    }
-    private val goodMan by lazy {
-        getDrawable(R.drawable.ic_player_blue_oval_48p)
-    }
-    private val badGuy by lazy {
-        getDrawable(R.drawable.ic_player_red_oval_48p)
-    }
+    private lateinit var gameBoardViewmodel: GameBoardViewModel
+
+//    private val winnerIcon by lazy { getDrawable(R.drawable.token_success) }
+//    private val loserIcon by lazy { getDrawable(R.drawable.token_failed) }
+//    private val goodMan by lazy { getDrawable(R.drawable.ic_player_blue_oval_48p) }
+//    private val badGuy by lazy { getDrawable(R.drawable.ic_player_red_oval_48p) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table)
         title = when (Players) {
-            GAME_SET_8 -> PLAYER_8
-            GAME_SET_10 -> PLAYER_10
-            else -> PLAYER_10
+            GAME_8P -> GAME_8P.toString() + TITLE_GAME_PLAYERS
+            GAME_10P -> GAME_10P.toString() + TITLE_GAME_PLAYERS
+            else -> GAME_10P.toString() + TITLE_GAME_PLAYERS
+        }
+        gameBoardViewmodel = ViewModelProviders.of(this).get(GameBoardViewModel::class.java)
+        initObserve()
+    }
+
+    private fun initObserve() {
+        gameBoardViewmodel.operation1.observe(this, Observer {
+            showOperateResult(result1.resultText, it)
+            result1.resultText.visibility = View.VISIBLE
+        })
+        gameBoardViewmodel.operation2.observe(this, Observer {
+            showOperateResult(result2.resultText, it)
+            result2.resultText.visibility = View.VISIBLE
+        })
+        gameBoardViewmodel.operation3.observe(this, Observer {
+            showOperateResult(result3.resultText, it)
+            result3.resultText.visibility = View.VISIBLE
+        })
+        gameBoardViewmodel.operation4.observe(this, Observer {
+            showOperateResult(result4.resultText, it)
+            result4.resultText.visibility = View.VISIBLE
+        })
+        gameBoardViewmodel.operation5.observe(this, Observer {
+            //TODO 目前這邊的it會是null導致閃退，尚不知原因
+            showOperateResult(result5.resultText, it)
+            result5.resultText.visibility = View.VISIBLE
+        })
+    }
+
+    private fun showOperateResult(result: TextView, operation: GameBoardEntity) {
+        result.text = when (operation.id) {
+            1 -> getString(R.string.mission_result_3p, operation.operator1, operation.operator2,
+                    operation.operator3, operation.bad)
+            2, 3 -> getString(R.string.mission_result_4p, operation.operator1, operation.operator2,
+                    operation.operator3, operation.operator4, operation.bad, operation.goddess,
+                    operation.asked)
+            4, 5 -> getString(R.string.mission_result_5p, operation.operator1, operation.operator2,
+                    operation.operator3, operation.operator4, operation.operator5, operation.bad,
+                    operation.goddess, operation.asked)
+            else -> ""
         }
     }
 
     override fun onClick(view: View) {
-        repeat(gameBoard.size){
-            gameBoard[it].isClickable = false
-        }
-        showGameResult()
-//        resultDialog.show()
-    }
-
-    override fun onClick(dialog: DialogInterface, which: Int) {
-        if (game < gameBoard.size) {
-            gameBoard[game].background = when (which) {
-                BUTTON_POSITIVE -> winnerIcon
-                BUTTON_NEGATIVE -> loserIcon
-                else -> gameBoard[game].background
-            }
-            gameBoard[game].isClickable = false
-
-            if (!checkWinner()) {
-                if (gameBoard[game] == game5) {
-                    showGameResult()
-                }
-                game += 1
-                if (game < gameBoard.size) {
-                    gameBoard[game].isClickable = true
-                }
-            }
-        }
-    }
-
-    private fun checkWinner(): Boolean {
-        var win = 0
-        var lose = 0
-        repeat(game) {
-            when (gameBoard[game].background) {
-                winnerIcon -> win += 1
-                else -> lose += 1
-            }
-        }
-        if (win == 3 || lose == 3) {
-            gameBoard.forEach {
-                it.isClickable = false
-            }
-            game = 5
-            showGameResult()
-            return true
-        }
-        return false
+        val resultDialog = ResultDialog()
+        resultDialog.isCancelable = false
+        resultDialog.show(supportFragmentManager, "Result")
     }
 
     private fun showGameResult() {
-        AlertDialog.Builder(this)
-                .setTitle(getString(R.string.app_name))
-                .setMessage(getString(R.string.end_game))
-                .setPositiveButton(getString(android.R.string.yes)) { _, _ ->
-                    repeat(players.size) {
-                        players[it].text = CHARACTERS[it].substring(0, 1)
-                        players[it].setTextColor(getColor(android.R.color.white))
-                        when (players[it].text) {
-                            "莫", "魔", "奧", "刺" -> players[it].background = badGuy
-                            else -> players[it].background = goodMan
-                        }
-                    }
-                }
-                .setCancelable(false)
-                .create()
-                .show()
-    }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        return if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            ReStartDialog(this).create().show()
-            true
-        } else super.onKeyDown(keyCode, event)
     }
 }

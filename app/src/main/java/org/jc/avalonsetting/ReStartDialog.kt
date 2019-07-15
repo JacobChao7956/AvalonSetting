@@ -2,10 +2,11 @@ package org.jc.avalonsetting
 
 import android.content.DialogInterface
 import android.content.DialogInterface.BUTTON_POSITIVE
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
 
-class ReStartDialog(private val activity: AppCompatActivity) : AlertDialog.Builder(activity), DialogInterface.OnClickListener {
+class ReStartDialog(private val activity: FragmentActivity) : AlertDialog.Builder(activity), DialogInterface.OnClickListener {
 
     override fun create(): AlertDialog {
         setTitle(R.string.app_name)
@@ -17,8 +18,7 @@ class ReStartDialog(private val activity: AppCompatActivity) : AlertDialog.Build
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
         if (BUTTON_POSITIVE == which) {
-            Players = 0
-            CHARACTERS.clear()
+            activity.startActivity(Intent(activity, MainActivity::class.java))
             activity.finish()
         }
     }

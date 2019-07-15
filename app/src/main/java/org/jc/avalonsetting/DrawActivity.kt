@@ -2,54 +2,42 @@ package org.jc.avalonsetting
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Debug
-import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import android.view.View.VISIBLE
-import android.widget.TextView
-import com.socks.library.KLog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_draw.*
+import org.jc.avalonsetting.framework.BaseActivity
+import org.jc.avalonsetting.viewmodel.PlayerViewModel
+import org.jc.avalonsetting.references.*
 
-class DrawActivity : AppCompatActivity(), View.OnClickListener {
+class DrawActivity : BaseActivity(), View.OnClickListener {
 
-    private var currentPlayer = 0
-    private val players = ArrayList<TextView>()
-    private val playerObjs by lazy {
-        arrayOf(player1, player2, player3, player4, player5,
-                player6, player7, player8, player9, player10)
-    }
+    private lateinit var playerViewModel: PlayerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draw)
         title = when (Players) {
-            GAME_SET_8 -> PLAYER_8
-            GAME_SET_10 -> PLAYER_10
-            else -> PLAYER_10
+            GAME_8P -> GAME_8P.toString() + TITLE_GAME_PLAYERS
+            GAME_10P -> GAME_10P.toString() + TITLE_GAME_PLAYERS
+            else -> ""
         }
-        playerObjs.forEach {
-            players.add(it)
-        }
-        CHARACTERS.addAll(resources.getStringArray(when (Players) {
-            GAME_SET_8 -> R.array.character_8
-            GAME_SET_10 -> R.array.character_all
-            else -> R.array.character_all
-        }))
-        //填入玩家數量
-        repeat(CHARACTERS.size) {
-            players[it].visibility = VISIBLE
-            players[it].text = when (Players) {
-                GAME_SET_8 -> if (it < 7) (it + 1).toString() else "0"
-                GAME_SET_10 -> if (it < 9) (it + 1).toString() else "0"
-                else -> "0"
+        playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
+        playerViewModel.allPlayers.observe(this, Observer {
+            playerViewModel.players = playerViewModel.allPlayers.value!!
+        })
+        playerViewModel.currentPlayer.observe(this, Observer {
+            val currentPlayer =
+                    if (playerViewModel.currentPlayer.value!! + 1 == 10) 0
+                    else playerViewModel.currentPlayer.value!! + 1
+            if (playerViewModel.currentPlayer.value!! < Players) {
+                cardNote.text = String.format(getString(R.string.which_player), currentPlayer)
             }
-        }
-        //亂數排列角色
-        CHARACTERS.shuffle()
-        if (Debug.isDebuggerConnected()) {
-            KLog.d(CHARACTERS)
-        }
+        })
+        playerViewModel.addNewPlayer()
     }
 
     override fun onClick(view: View?) {
@@ -57,27 +45,13 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showCharacterCard() {
-        if (currentPlayer < 10) {
-            val bundle = Bundle()
-            bundle.putInt(CURRENT_PLAYER, currentPlayer)
-            val fragment = CharacterFragment()
-            fragment.arguments = bundle
-            fragment.show(supportFragmentManager, "Character")
-            if (currentPlayer == 9) {
-                draw.background = getDrawable(R.drawable.shild)
-            }
-            players[currentPlayer].background = getDrawable(R.drawable.ic_player_black_oval_48p)
-            currentPlayer += 1
+        if (playerViewModel.currentPlayer.value!! < Players) {
+            val characterDialog = CharacterDialog()
+            characterDialog.isCancelable = false
+            characterDialog.show(supportFragmentManager, "Character")
         } else {
             startActivity(Intent(this, TableActivity::class.java))
             finish()
         }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        return if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            ReStartDialog(this).create().show()
-            true
-        } else super.onKeyDown(keyCode, event)
     }
 }

@@ -1,156 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/player1"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="1"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/player6"
-        app:layout_constraintEnd_toStartOf="@+id/player2"
+        android:id="@+id/cardNote"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/draw_character"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardback"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/player2"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="2"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player3"
-        app:layout_constraintStart_toEndOf="@+id/player1"
-        app:layout_constraintTop_toTopOf="@+id/player1" />
-
-    <TextView
-        android:id="@+id/player3"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="3"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player4"
-        app:layout_constraintStart_toEndOf="@+id/player2"
-        app:layout_constraintTop_toTopOf="@+id/player2" />
-
-    <TextView
-        android:id="@+id/player4"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="4"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player5"
-        app:layout_constraintStart_toEndOf="@+id/player3"
-        app:layout_constraintTop_toTopOf="@+id/player3" />
-
-    <TextView
-        android:id="@+id/player5"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="5"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/player4"
-        app:layout_constraintTop_toTopOf="@+id/player4" />
-
-    <TextView
-        android:id="@+id/player6"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="6"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1" />
-
-    <TextView
-        android:id="@+id/player7"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="7"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player8"
-        app:layout_constraintStart_toEndOf="@+id/player6"
-        app:layout_constraintTop_toTopOf="@+id/player6" />
-
-    <TextView
-        android:id="@+id/player8"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="8"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player9"
-        app:layout_constraintStart_toEndOf="@+id/player7"
-        app:layout_constraintTop_toTopOf="@+id/player7" />
-
-    <TextView
-        android:id="@+id/player9"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="9"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/player10"
-        app:layout_constraintStart_toEndOf="@+id/player8"
-        app:layout_constraintTop_toTopOf="@+id/player8" />
-
-    <TextView
-        android:id="@+id/player10"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="0"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/player9"
-        app:layout_constraintTop_toTopOf="@+id/player9" />
-
-    <Button
-        android:id="@+id/draw"
-        android:layout_width="0dp"
+    <ImageButton
+        android:id="@+id/cardback"
+        android:layout_width="279dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/cardback"
+        android:maxHeight="393dp"
         android:onClick="onClick"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player6" />
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cardNote"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
