@@ -50,8 +50,8 @@ class DrawActivity : BaseActivity(), View.OnClickListener {
             characterDialog.isCancelable = false
             characterDialog.show(supportFragmentManager, "Character")
         } else {
-            startActivity(Intent(this, TableActivity::class.java))
-            finish()
+//            startActivity(Intent(this, TableActivity::class.java))
+//            finish()
         }
     }
 }
