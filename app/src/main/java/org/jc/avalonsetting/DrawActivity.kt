@@ -1,5 +1,6 @@
 package org.jc.avalonsetting
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -7,12 +8,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_draw.*
-import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
+import org.jc.avalonsetting.framework.BaseActivity
+import org.jc.avalonsetting.viewmodel.PlayerViewModel
 import org.jc.avalonsetting.references.*
 
-class DrawActivity : AppCompatActivity(), View.OnClickListener {
+class DrawActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var playerViewModel: PlayerViewModel
 
@@ -22,7 +23,7 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
         title = when (Players) {
             GAME_8P -> GAME_8P.toString() + TITLE_GAME_PLAYERS
             GAME_10P -> GAME_10P.toString() + TITLE_GAME_PLAYERS
-            else -> GAME_10P.toString() + TITLE_GAME_PLAYERS
+            else -> ""
         }
         playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
         playerViewModel.allPlayers.observe(this, Observer {
@@ -37,12 +38,6 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
         playerViewModel.addNewPlayer()
-        Log.d("DrawActivity", "onCreate")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("DrawActivity", "onResume")
     }
 
     override fun onClick(view: View?) {
@@ -51,17 +46,12 @@ class DrawActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showCharacterCard() {
         if (playerViewModel.currentPlayer.value!! < Players) {
-            CharacterFragment().show(supportFragmentManager, "Character")
+            val characterDialog = CharacterDialog()
+            characterDialog.isCancelable = false
+            characterDialog.show(supportFragmentManager, "Character")
         } else {
-//            startActivity(Intent(this, TableActivity::class.java))
-//            finish()
+            startActivity(Intent(this, TableActivity::class.java))
+            finish()
         }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        return if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            ReStartDialog(this).create().show()
-            true
-        } else super.onKeyDown(keyCode, event)
     }
 }

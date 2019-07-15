@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "player")
 data class PlayerEntity(
+        @PrimaryKey
+        val id: Int,
         /**
          * 玩家編號
          */
-        @PrimaryKey
-        val id: Int,
         val order: Int,
         /**
          * 玩家名稱

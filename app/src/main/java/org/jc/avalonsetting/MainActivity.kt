@@ -9,11 +9,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
 import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
+import org.jc.avalonsetting.framework.BaseActivity
+import org.jc.avalonsetting.viewmodel.GameBoardViewModel
+import org.jc.avalonsetting.viewmodel.PlayerViewModel
 import org.jc.avalonsetting.references.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : BaseActivity(), View.OnClickListener {
 
+    private lateinit var gameBoardViewmodel: GameBoardViewModel
     private lateinit var playerViewModel: PlayerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,11 +24,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         title = getString(R.string.title_main)
         playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel::class.java)
-    }
-
-    override fun onResume() {
-        super.onResume()
+        gameBoardViewmodel = ViewModelProviders.of(this).get(GameBoardViewModel::class.java)
+        //本地資料庫資料初始化
         playerViewModel.deleteAll()
+        gameBoardViewmodel.initOperations()
     }
 
     override fun onClick(view: View?) {

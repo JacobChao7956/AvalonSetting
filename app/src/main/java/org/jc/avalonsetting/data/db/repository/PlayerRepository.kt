@@ -6,7 +6,7 @@ import org.jc.avalonsetting.data.db.dao.PlayerDao
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
 
 class PlayerRepository(private val playerDao: PlayerDao) {
-    val allLivePlayers: LiveData<List<PlayerEntity>> = playerDao.getAllLivePlayers()
+    val allPlayers: LiveData<List<PlayerEntity>> = playerDao.getAllPlayers()
 
     @WorkerThread
     suspend fun insert(player: PlayerEntity) {

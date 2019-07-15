@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_character.*
+import kotlinx.android.synthetic.main.dialog_character.*
 import org.jc.avalonsetting.data.db.entity.PlayerEntity
-import org.jc.avalonsetting.data.viewmodel.PlayerViewModel
+import org.jc.avalonsetting.viewmodel.PlayerViewModel
 import org.jc.avalonsetting.references.GAME_8P
 import org.jc.avalonsetting.references.Players
 import java.util.*
 
-class CharacterFragment : DialogFragment(), View.OnClickListener {
+class CharacterDialog : DialogFragment(), View.OnClickListener {
 
     private lateinit var playerViewModel: PlayerViewModel
     private var player: PlayerEntity? = null
@@ -39,7 +39,7 @@ class CharacterFragment : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return LayoutInflater.from(context).inflate(R.layout.fragment_character, container, false)
+        return LayoutInflater.from(context).inflate(R.layout.dialog_character, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

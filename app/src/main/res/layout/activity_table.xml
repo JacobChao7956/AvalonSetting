@@ -4,135 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".TableActivity">
 
     <include
-        layout="@layout/view_table"
-        android:id="@+id/table"
+        android:id="@+id/result1"
+        layout="@layout/view_result"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/player8"
-        app:layout_constraintStart_toEndOf="@+id/player3"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </include>
-
-    <TextView
-        android:id="@+id/player1"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="1"
-        app:layout_constraintBottom_toTopOf="@+id/player2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/table" />
-
-    <TextView
-        android:id="@+id/player2"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        app:layout_constraintBottom_toTopOf="@+id/player3"
-        app:layout_constraintStart_toStartOf="@+id/player1"
-        app:layout_constraintTop_toBottomOf="@+id/player1" />
-
-    <TextView
-        android:id="@+id/player3"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3"
-        app:layout_constraintBottom_toTopOf="@+id/player4"
-        app:layout_constraintEnd_toEndOf="@+id/player2"
-        app:layout_constraintStart_toStartOf="@+id/player2"
-        app:layout_constraintTop_toBottomOf="@+id/player2" />
-
-    <TextView
-        android:id="@+id/player4"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        app:layout_constraintBottom_toTopOf="@+id/player5"
-        app:layout_constraintEnd_toEndOf="@+id/player3"
-        app:layout_constraintStart_toStartOf="@+id/player3"
-        app:layout_constraintTop_toBottomOf="@+id/player3" />
-
-    <TextView
-        android:id="@+id/player5"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="5"
-        app:layout_constraintBottom_toBottomOf="@+id/table"
-        app:layout_constraintEnd_toEndOf="@+id/player4"
-        app:layout_constraintStart_toStartOf="@+id/player4"
-        app:layout_constraintTop_toBottomOf="@+id/player4" />
-
-    <TextView
-        android:id="@+id/player6"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="6"
-        app:layout_constraintBottom_toTopOf="@+id/player7"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/result2"
+        layout="@layout/view_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result3"
+        app:layout_constraintStart_toEndOf="@+id/result1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/result3"
+        layout="@layout/view_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result4"
+        app:layout_constraintStart_toEndOf="@+id/result2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/result4"
+        layout="@layout/view_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result5"
+        app:layout_constraintStart_toEndOf="@+id/result3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/result5"
+        layout="@layout/view_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/table" />
-
-    <TextView
-        android:id="@+id/player7"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="7"
-        app:layout_constraintBottom_toTopOf="@+id/player8"
-        app:layout_constraintEnd_toEndOf="@+id/player6"
-        app:layout_constraintStart_toStartOf="@+id/player6"
-        app:layout_constraintTop_toBottomOf="@+id/player6" />
-
-    <TextView
-        android:id="@+id/player8"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8"
-        app:layout_constraintBottom_toTopOf="@+id/player9"
-        app:layout_constraintEnd_toEndOf="@+id/player7"
-        app:layout_constraintStart_toStartOf="@+id/player7"
-        app:layout_constraintTop_toBottomOf="@+id/player7" />
-
-    <TextView
-        android:id="@+id/player9"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="9"
-        app:layout_constraintBottom_toTopOf="@+id/player10"
-        app:layout_constraintEnd_toEndOf="@+id/player8"
-        app:layout_constraintStart_toStartOf="@+id/player8"
-        app:layout_constraintTop_toBottomOf="@+id/player8" />
-
-    <TextView
-        android:id="@+id/player10"
-        style="@style/PlayerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="0"
-        app:layout_constraintBottom_toBottomOf="@+id/table"
-        app:layout_constraintEnd_toEndOf="@+id/player9"
-        app:layout_constraintStart_toStartOf="@+id/player9"
-        app:layout_constraintTop_toBottomOf="@+id/player9" />
-
+        app:layout_constraintStart_toEndOf="@+id/result4"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

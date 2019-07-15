@@ -7,7 +7,7 @@ import org.jc.avalonsetting.data.db.entity.PlayerEntity
 @Dao
 interface PlayerDao {
     @Query("SELECT * from player ORDER BY id ASC")
-    fun getAllLivePlayers(): LiveData<List<PlayerEntity>>
+    fun getAllPlayers(): LiveData<List<PlayerEntity>>
 
     @Query("SELECT * from player WHERE id > :id")
     fun getPlayer(id: Int): PlayerEntity

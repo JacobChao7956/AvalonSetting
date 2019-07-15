@@ -15,4 +15,4 @@ const val CURRENT_PLAYER = "cp"
 
 const val WHITE_BALL = 0
 const val BLACK_BALL = 1
-const val NO_GODDESS = 99
+const val NO_ONE = -1

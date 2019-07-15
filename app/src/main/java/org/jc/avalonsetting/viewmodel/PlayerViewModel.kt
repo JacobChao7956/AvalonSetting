@@ -1,4 +1,4 @@
-package org.jc.avalonsetting.data.viewmodel
+package org.jc.avalonsetting.viewmodel
 
 import android.app.Application
 import android.content.res.Resources
@@ -22,12 +22,12 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
     var allPlayers: LiveData<List<PlayerEntity>>
     lateinit var players: List<PlayerEntity>
     var currentPlayer = MutableLiveData(0)
-    private var res:Resources
+    private var res: Resources
 
     init {
         val playerDao = InfoDatabase.getDatabase(app, viewModelScope).playerDao()
         repository = PlayerRepository(playerDao)
-        allPlayers = repository.allLivePlayers
+        allPlayers = repository.allPlayers
         res = app.resources
     }
 
@@ -45,13 +45,10 @@ class PlayerViewModel(app: Application) : AndroidViewModel(app) {
             //亂數排列角色
             characters.shuffle()
             if (Debug.isDebuggerConnected()) {
-                KLog.d(characters)
+                KLog.d("", "${Players}人局，玩家角色順序：$characters")
             }
             for (i in 0 until Players) {
-                val order = when (Players) {
-                    GAME_8P -> if (i == 7) 0 else i + 1
-                    else -> if (i == 9) 0 else i + 1
-                }
+                val order = if (GAME_10P == Players && i == 9) 0 else i + 1
                 val player = PlayerEntity(i, order, "", characters[i], checkSide(characters[i]))
                 repository.insert(player)
             }
