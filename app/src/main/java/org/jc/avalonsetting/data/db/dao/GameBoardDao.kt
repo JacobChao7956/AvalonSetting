@@ -8,7 +8,7 @@ import org.jc.avalonsetting.data.db.entity.PlayerEntity
 @Dao
 interface GameBoardDao {
     @Query("SELECT * FROM game_board ORDER BY id ASC")
-    fun getAllOperations(): LiveData<List<GameBoardEntity>>
+    fun getOperations(): LiveData<List<GameBoardEntity>>
 
     @Query("SELECT * FROM game_board WHERE id > :id")
     fun getOperation(id: Int): LiveData<GameBoardEntity>
@@ -24,8 +24,4 @@ interface GameBoardDao {
 
     @Query("DELETE FROM game_board")
     fun deleteAll()
-//    suspend fun deleteAll()
-
-//    @Query("SELECT count(*)  FROM sqlite_mater WHERE type >:table ORDER BY game_board;")
-//    fun check()
 }

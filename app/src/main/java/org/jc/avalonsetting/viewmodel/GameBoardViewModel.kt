@@ -10,11 +10,10 @@ import kotlinx.coroutines.launch
 import org.jc.avalonsetting.data.db.InfoDatabase
 import org.jc.avalonsetting.data.db.entity.GameBoardEntity
 import org.jc.avalonsetting.data.db.repository.GameBoardRepository
-import org.jc.avalonsetting.references.NO_ONE
 
 class GameBoardViewModel(app: Application) : AndroidViewModel(app) {
     private val repository: GameBoardRepository
-    var allOperations: LiveData<List<GameBoardEntity>>
+    var operations: LiveData<List<GameBoardEntity>>
     val operation1: LiveData<GameBoardEntity>
     val operation2: LiveData<GameBoardEntity>
     val operation3: LiveData<GameBoardEntity>
@@ -25,7 +24,7 @@ class GameBoardViewModel(app: Application) : AndroidViewModel(app) {
     init {
         val gameBoardDao = InfoDatabase.getDatabase(app, viewModelScope).gameBoardDao()
         repository = GameBoardRepository(gameBoardDao)
-        allOperations = repository.allOperations
+        operations = repository.operations
         operation1 = repository.operation1
         operation2 = repository.operation2
         operation3 = repository.operation3

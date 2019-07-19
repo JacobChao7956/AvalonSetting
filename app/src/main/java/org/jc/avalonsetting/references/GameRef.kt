@@ -1,7 +1,6 @@
 package org.jc.avalonsetting.references
 
 //Game Set
-const val GAME_PLAYERS = "gmps"
 const val GAME_8P = 8
 const val GAME_10P = 10
 const val TITLE_GAME_PLAYERS = "人局"

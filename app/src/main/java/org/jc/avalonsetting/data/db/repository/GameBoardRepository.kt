@@ -7,7 +7,7 @@ import org.jc.avalonsetting.data.db.entity.GameBoardEntity
 
 class GameBoardRepository(private val gameBoardDao: GameBoardDao) {
 
-    val allOperations: LiveData<List<GameBoardEntity>> = gameBoardDao.getAllOperations()
+    val operations: LiveData<List<GameBoardEntity>> = gameBoardDao.getOperations()
     var operation1: LiveData<GameBoardEntity> = gameBoardDao.getOperation(1)
     var operation2: LiveData<GameBoardEntity> = gameBoardDao.getOperation(2)
     var operation3: LiveData<GameBoardEntity> = gameBoardDao.getOperation(3)

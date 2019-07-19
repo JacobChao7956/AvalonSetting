@@ -1,17 +1,16 @@
 package org.jc.avalonsetting
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_draw.*
 import org.jc.avalonsetting.framework.BaseActivity
+import org.jc.avalonsetting.references.GAME_10P
+import org.jc.avalonsetting.references.GAME_8P
+import org.jc.avalonsetting.references.Players
+import org.jc.avalonsetting.references.TITLE_GAME_PLAYERS
 import org.jc.avalonsetting.viewmodel.PlayerViewModel
-import org.jc.avalonsetting.references.*
 
 class DrawActivity : BaseActivity(), View.OnClickListener {
 
